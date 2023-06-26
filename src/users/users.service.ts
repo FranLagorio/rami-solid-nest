@@ -4,8 +4,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersProvider } from 'src/common/interface/usersProvider-adapter.interface';
 import {
   JsonUsersProvider,
-  LocalProviderAdapter,
-  WebApiProvider,
+  LocalUserProvider,
+  WebApiUserProvider,
 } from 'src/common/adapters/usersProvider-adapter';
 // import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -16,7 +16,7 @@ export class UsersService {
     //! Esto genera un acoplamiento fuerte - tengo entendido que esta mal, no pude lograr hacer andar por ahora que el provider venga del controller
     //! me queda pendiente revisarlo, en teoria es con el decorador @Inject() de NestJs
     //! tengo dudas todavia de este caso
-    this.usersProvider = new WebApiProvider();
+    this.usersProvider = new WebApiUserProvider();
   }
 
   create(createUserDto: CreateUserDto) {

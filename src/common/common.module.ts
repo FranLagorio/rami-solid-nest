@@ -4,8 +4,8 @@ import { AxiosAdapter } from './adapters/axios.adapter';
 import { FetchAdapter } from './adapters/fetch.adapter';
 import {
   JsonUsersProvider,
-  LocalProviderAdapter,
-  WebApiProvider,
+  LocalUserProvider,
+  WebApiUserProvider,
 } from './adapters/usersProvider-adapter';
 
 @Module({
@@ -14,8 +14,8 @@ import {
     AxiosAdapter,
     FetchAdapter,
     JsonUsersProvider,
-    LocalProviderAdapter,
-    WebApiProvider,
+    LocalUserProvider,
+    WebApiUserProvider,
   ],
   exports: [],
 })

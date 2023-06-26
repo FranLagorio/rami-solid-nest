@@ -18,7 +18,7 @@ import jsonUsers from '../../data/usersLocalJson.json';
 import { HttpAdapter } from '../interface/http-adapter.interface';
 import { AxiosAdapter } from './axios.adapter';
 
-const data = {
+const userLocalData = {
   users: [
     {
       id: 1,
@@ -116,15 +116,15 @@ export class JsonUsersProvider implements UsersProvider {
 }
 
 @Injectable()
-export class LocalProviderAdapter implements UsersProvider {
+export class LocalUserProvider implements UsersProvider {
   async getUsers(): Promise<UsersAPI> {
-    return data as UsersAPI;
+    return userLocalData as UsersAPI;
   }
 
   async getUserById(id: number): Promise<User> {
-    const post = data.users.find((user) => user.id === id);
-    if (post !== undefined) {
-      return post as User;
+    const user = userLocalData.users.find((user) => user.id === id);
+    if (user !== undefined) {
+      return user as User;
     }
 
     throw new Error('User not found');
@@ -132,7 +132,7 @@ export class LocalProviderAdapter implements UsersProvider {
 }
 
 @Injectable()
-export class WebApiProvider implements UsersProvider {
+export class WebApiUserProvider implements UsersProvider {
   /*
    constructor(private http: FetchAdapter) {}
    */
