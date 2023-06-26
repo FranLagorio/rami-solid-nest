@@ -14,7 +14,7 @@ const providersNames = {
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(providersNames.json)
+    @Inject(providersNames.api)
     private readonly usersProvider: UsersProvider,
   ) {}
 
@@ -37,15 +37,15 @@ export class UsersService {
   }
 }
 
-interface HasEmail {
-  name: string;
-  email: string;
-}
+// interface HasEmail {
+//   name: string;
+//   email: string;
+// }
 
-interface HasPhoneNumber {
-  name: string;
-  phone: string;
-}
+// interface HasPhoneNumber {
+//   name: string;
+//   phone: string;
+// }
 
 /* function contactPeople(method: "email", people: HasEmail): void;
 function contactPeople(method: "phone", people: HasPhoneNumber): void;

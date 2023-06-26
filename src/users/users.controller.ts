@@ -6,10 +6,14 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  private visitantes: number;
+  constructor(private readonly usersService: UsersService) {
+    this.visitantes = 0;
+  }
 
   @Get()
   findAll() {
+    this.visitantes = +1;
     return this.usersService.findAll();
   }
 

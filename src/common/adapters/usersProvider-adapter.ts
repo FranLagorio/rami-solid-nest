@@ -6,7 +6,7 @@
 
 * Utilizo el pincipio /DRY/ ya que sino tendria que hacer otra clase para fetch y seria repetir codigo
 
-* Utilizo inyeccion de dependencia para que las consultas solo dependan de la variable/propiedad http que puede ser Fetch o Axios
+* Utilizo OPEN CLOSE para que las consultas solo dependan de la variable/propiedad http que puede ser Fetch o Axios
 */
 
 import { Injectable } from '@nestjs/common';
