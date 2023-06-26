@@ -1,27 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersProvider } from 'src/common/interface/usersProvider-adapter.interface';
-import {
-  JsonUsersProvider,
-  LocalUserProvider,
-  WebApiUserProvider,
-} from 'src/common/adapters/usersProvider-adapter';
+
 // import { UpdateUserDto } from './dto/update-user.dto';
+
+const providersNames = {
+  json: 'JsonUserProvider',
+  local: 'LocalUserProvider',
+  api: 'WebApiUserProvider',
+};
 
 @Injectable()
 export class UsersService {
-  private usersProvider: UsersProvider;
-  constructor() {
-    //! Esto genera un acoplamiento fuerte - tengo entendido que esta mal, no pude lograr hacer andar por ahora que el provider venga del controller
-    //! me queda pendiente revisarlo, en teoria es con el decorador @Inject() de NestJs
-    //! tengo dudas todavia de este caso
-    this.usersProvider = new WebApiUserProvider();
-  }
-
-  create(createUserDto: CreateUserDto) {
-    return `User created : ${JSON.stringify(createUserDto)}`;
-  }
+  constructor(
+    @Inject(providersNames.json)
+    private readonly usersProvider: UsersProvider,
+  ) {}
 
   async findAll() {
     try {
@@ -41,3 +36,33 @@ export class UsersService {
     }
   }
 }
+
+interface HasEmail {
+  name: string;
+  email: string;
+}
+
+interface HasPhoneNumber {
+  name: string;
+  phone: string;
+}
+
+/* function contactPeople(method: "email", people: HasEmail): void;
+function contactPeople(method: "phone", people: HasPhoneNumber): void;
+function contactPeople(
+  method: "email" | "phone",
+  people: HasEmail | HasPhoneNumber
+): void {
+  if (method === "email") {
+    console.log("Name: ", (people as HasEmail).name);
+    console.log("Email: ", (people as HasEmail).email);
+  } else {
+    console.log("Name: ", (people as HasPhoneNumber).name);
+    console.log("Phone: ", (people as HasPhoneNumber).phone);
+  }
+}
+
+contactPeople("email", { name: "Nahuel", email: "12345678" });
+! Error
+// contactPeople('email', { name: 'Nahuel', phone: '12345678' });
+ */

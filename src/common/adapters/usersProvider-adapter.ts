@@ -12,7 +12,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { UsersProvider } from '../interface/usersProvider-adapter.interface';
-import { User, UsersAPI } from 'src/users/entities/user.entity';
+import { User, Users } from 'src/users/entities/user.entity';
 import jsonUsers from '../../data/usersLocalJson.json';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpAdapter } from '../interface/http-adapter.interface';
@@ -90,7 +90,7 @@ const userLocalData = {
 
 @Injectable()
 export class JsonUsersProvider implements UsersProvider {
-  async getUsers(): Promise<UsersAPI> {
+  async getUsers(): Promise<Users> {
     const response = jsonUsers;
 
     const usersSerialized = response?.users.map((user) => {
@@ -99,7 +99,7 @@ export class JsonUsersProvider implements UsersProvider {
     });
 
     const data = { ...response, users: usersSerialized };
-    return data as UsersAPI;
+    return data as Users;
   }
 
   async getUserById(id: number): Promise<User> {
@@ -116,9 +116,9 @@ export class JsonUsersProvider implements UsersProvider {
 }
 
 @Injectable()
-export class LocalUserProvider implements UsersProvider {
-  async getUsers(): Promise<UsersAPI> {
-    return userLocalData as UsersAPI;
+export class LocalUsersProvider implements UsersProvider {
+  async getUsers(): Promise<Users> {
+    return userLocalData as Users;
   }
 
   async getUserById(id: number): Promise<User> {
@@ -141,8 +141,8 @@ export class WebApiUserProvider implements UsersProvider {
     this.http = new AxiosAdapter();
   }
 
-  async getUsers(): Promise<UsersAPI> {
-    const data = await this.http.get<UsersAPI>('https://dummyjson.com/users');
+  async getUsers(): Promise<Users> {
+    const data = await this.http.get<Users>('https://dummyjson.com/users');
     return data;
   }
 

@@ -1,4 +1,4 @@
-export interface UsersAPI {
+export interface Users {
   users: User[];
   total: number;
   skip: number;

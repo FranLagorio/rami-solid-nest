@@ -4,7 +4,7 @@ import { AxiosAdapter } from './adapters/axios.adapter';
 import { FetchAdapter } from './adapters/fetch.adapter';
 import {
   JsonUsersProvider,
-  LocalUserProvider,
+  LocalUsersProvider,
   WebApiUserProvider,
 } from './adapters/usersProvider-adapter';
 
@@ -14,7 +14,7 @@ import {
     AxiosAdapter,
     FetchAdapter,
     JsonUsersProvider,
-    LocalUserProvider,
+    LocalUsersProvider,
     WebApiUserProvider,
   ],
   exports: [],
